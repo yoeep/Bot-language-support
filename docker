@@ -1,6 +1,11 @@
-FROM python 
+# Dockerfile
+FROM python:3.9-slim
 
-# 设置工作目录
-WORKDIR /usr/src/app
+WORKDIR /app
 
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
 
+COPY . .
+
+CMD ["python", "app.py"]
