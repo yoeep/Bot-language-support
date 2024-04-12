@@ -8,9 +8,9 @@ import random
 class GPTAssistant:
     def __init__(self, tools=None, system_info=None):
         if tools is None:
-            import tools
-            self.tools = tools.tools
-            self.system_info = tools.system_info
+            from gpt import tool_factory
+            self.tools = tool_factory.tools
+            self.system_info = tool_factory.system_info
         else:
             self.tools = tools
             self.system_info = system_info
@@ -47,13 +47,18 @@ class GPTAssistant:
         return assistant_output['content']
 
     def chat(self, q):
-        messages = [{
-            "content": q,
-            "role": "user"
-        }]
-        return self.__call_with_messages(messages)
+        try:
+
+            messages = [{
+                "content": q,
+                "role": "user"
+            }]
+            return self.__call_with_messages(messages)
+        except Exception as e:
+            print(e)
+            return "gpt出错了"
 
 if __name__ == '__main__':
-    import  tools
-    assistant = GPTAssistant(tools.tools, tools.system_info)
+    import tool_factory
+    assistant = GPTAssistant(tool_factory.tools, tool_factory.system_info)
     print(assistant.chat("我要ting周杰伦"))

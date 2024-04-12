@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from gpt import  GPTAssistant
+from gpt.gpt import  GPTAssistant
 
 app = Flask(__name__)
 
