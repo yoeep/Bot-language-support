@@ -23,7 +23,7 @@ class GPTAssistant:
             tools=self.tools,
             seed=random.randint(1, 10000),
             result_format='message',
-            api_key='sk-1c428da2a6d14bf6b3f5eaed88c07197'
+            api_key='sk-'
         )
         return response
 
