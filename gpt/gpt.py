@@ -49,11 +49,15 @@ class GPTAssistant:
         return assistant_output['content']
 
     def chat(self, q):
-        messages = [{
-            "content": q,
-            "role": "user"
-        }]
-        return self.__call_with_messages(messages)
+        try:
+            messages = [{
+                "content": q,
+                "role": "user"
+            }]
+            return self.__call_with_messages(messages)
+        except Exception as e:
+            print("Error:", e)
+            return "GPT出错了!"
 if __name__ == '__main__':
     import tool_factory
     assistant = GPTAssistant(tool_factory.tools, tool_factory.system_info)
