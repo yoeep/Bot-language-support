@@ -35,6 +35,6 @@ jobs:
         script: |
           cd /home/deploy-user/Bot-language-support/projects/gpt0
           docker ps  | grep 'gpt' | awk '{print $1}' | xargs -I {} docker stop {}
-          docker ps  | grep 'gpt' | awk '{print $1}' | xargs -I {} docker rm {}
+          docker ps -a  | grep 'gpt' | awk '{print $1}' | xargs -I {} docker rm {}
           docker build -t gpt0:${{ github.run_number }} .
           docker run -d gpt0:${{ github.run_number }}
