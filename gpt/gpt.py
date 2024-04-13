@@ -33,7 +33,7 @@ class GPTAssistant:
         assistant_output = self.__get_response(messages).output.choices[0].message
         if assistant_output.content == "":
             messages.append(assistant_output)
-            import function_map
+            import gpt.function_map as function_map
             func = getattr(function_map, assistant_output.tool_calls[0]['function']['name'])
             param = eval(assistant_output.tool_calls[0]['function']['arguments'])
             tool_info = {"name": assistant_output.tool_calls[0]['function']['name'], 'role': 'tool',
