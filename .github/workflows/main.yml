@@ -34,6 +34,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd /home/deploy-user/Bot-language-support/projects/gpt0
+          echo ${{ secrets.GPT_KEY}} > gpt/gpt_key.init
           docker ps  | grep 'gpt' | awk '{print $1}' | xargs -I {} docker stop {}
           docker ps -a  | grep 'gpt' | awk '{print $1}' | xargs -I {} docker rm {}
           docker build -t gpt0:${{ github.run_number }} .
