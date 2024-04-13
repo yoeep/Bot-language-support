@@ -38,4 +38,4 @@ jobs:
           docker ps  | grep 'gpt' | awk '{print $1}' | xargs -I {} docker stop {}
           docker ps -a  | grep 'gpt' | awk '{print $1}' | xargs -I {} docker rm {}
           docker build -t gpt0:${{ github.run_number }} .
-          docker run -d gpt0:${{ github.run_number }}
+          docker run -d -p 5000:5000 gpt0:${{ github.run_number }} 
