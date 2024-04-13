@@ -14,7 +14,9 @@ class GPTAssistant:
         else:
             self.tools = tools
             self.system_info = system_info
-
+        with open('./gpt/gpt_key.init', 'r') as file:
+            key = file.read()
+        self.key = key
 
     def __get_response(self, messages):
         response = Generation.call(
@@ -23,7 +25,7 @@ class GPTAssistant:
             tools=self.tools,
             seed=random.randint(1, 10000),
             result_format='message',
-            api_key='sk-'
+            api_key='sk-'+self.key
         )
         return response
 
