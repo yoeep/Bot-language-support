@@ -9,9 +9,12 @@ tools = [
                 "properties": {
                     "sing": {
                         "description": "需要点播的歌名(比如:龙卷风)"
+                    },
+                    "user_id": {
+                        "description": "点播用户的ID"
                     }
                 },
-                "required": ['sing']
+                "required": ['sing', 'user_id']
             }
         }
     }
