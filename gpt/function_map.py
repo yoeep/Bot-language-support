@@ -1,5 +1,5 @@
-from flask import Flask, request, jsonify
 import requests
+from utils import logUtils as logger
 def callback_support(callback_info, request_body):
     if callback_info:
         url = callback_info.get('url')
@@ -7,13 +7,17 @@ def callback_support(callback_info, request_body):
         headers = callback_info.get('header')
 
         if url:
-            print(f"{url},{body}, {headers}")
+            logger.info(f"{url},{body}, {headers}")
             timeout = (5, 10)
             body.update(request_body)
-            print(body)
-            response = requests.post(url, json=body, headers=headers, timeout=timeout)
-            print(response.text)
-            return response.text
+            logger.info(body)
+            try:
+                response = requests.post(url, json=body, headers=headers, timeout=timeout)
+                logger.info(response.text)
+                return response.text
+            except Exception as e:
+                logger.error(e)
+
 
 
 def sing_voice(sing, user_id, callback_info):

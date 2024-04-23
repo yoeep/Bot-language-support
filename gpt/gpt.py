@@ -1,8 +1,8 @@
 # gpt.py
 
 from dashscope import Generation
-from datetime import datetime
 import random
+from utils import logUtils as logger
 
 
 class GPTAssistant:
@@ -36,6 +36,7 @@ class GPTAssistant:
             from gpt import function_map
             func = getattr(function_map, assistant_output.tool_calls[0]['function']['name'])
             param = eval(assistant_output.tool_calls[0]['function']['arguments'])
+            logger.info(f'function : {func}, parameter : {param}')
             if callback_info :
                 param['callback_info'] = callback_info
             tool_info = {"name": assistant_output.tool_calls[0]['function']['name'], 'role': 'tool',
